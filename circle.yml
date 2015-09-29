@@ -1,0 +1,21 @@
+machine:
+  environment:
+    GOROOT_BOOTSTRAP: /usr/local/go
+
+  post:
+    - mkdir -p ~/.go_workspace/src
+    - mkdir -p ~/.go_workspace/pkg
+    - mkdir -p ~/.go_workspace/bin
+
+    - curl -O https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz
+    - tar -C $HOME -xzf go1.5.1.linux-amd64.tar.gz
+    - ./make.bash:
+        pwd: $HOME/go/src
+    - cp -R * ~/.go_workspace/bin:
+        pwd: $HOME/go/bin
+    - cp -R * ~/.go_workspace/pkg:
+        pwd: $HOME/go/pkg
+  
+dependencies:
+  pre:
+    - go version
