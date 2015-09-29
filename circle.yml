@@ -22,9 +22,10 @@ dependencies:
 
 test:
   override:
-    - mkdir -p $HOME/go/src/github.com/shinofara
-    - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $HOME/go/src/github.com/shinofara/
+    - mkdir -p $GOPATH/src/github.com/shinofara
+    - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $GOPATH/src/github.com/shinofara/
     - pwd
     - ls -la $HOME/$CIRCLE_PROJECT_REPONAME
     - echo $HOME/$CIRCLE_PROJECT_REPONAME
+    - echo $GOPATH
     - GO15VENDOREXPERIMENT=1 go test
