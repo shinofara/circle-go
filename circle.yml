@@ -1,28 +1,16 @@
 machine:
   environment:
     GO15VENDOREXPERIMENT: 1
-    PATH: /home/ubuntu/go/bin:~/bin:$PATH
-    GOROOT: /home/ubuntu/go
-
-  post:
-    - mkdir -p ~/.go_workspace/src
-    - mkdir -p ~/.go_workspace/pkg
-    - mkdir -p ~/.go_workspace/bin
-
-    - curl -O https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz
-    - tar -C $HOME -xzf go1.5.linux-amd64.tar.gz
-    - cp -R * ~/.go_workspace/bin:
-        pwd: $HOME/go/bin
-    - cp -R * ~/.go_workspace/pkg:
-        pwd: $HOME/go/pkg
+    GOROOT: "/home/ubuntu/go"
+    PATH: "/home/ubuntu/go/bin:$PATH"
 
 dependencies:
-  override:
-    - go version
+  cache_directories:
+    - "/home/ubuntu/go"
+  pre:
+    - if [[ ! -e /home/ubuntu/go/bin/go ]]; then cd /home/ubuntu; curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | tar -xz; fi
 
 test:
   override:
-    - mkdir -p /home/ubuntu/.go_workspace/src/github.com/shinofara
-    - cp -r $HOME/$CIRCLE_PROJECT_REPONAME /home/ubuntu/.go_workspace/src/github.com/shinofara/
     - go version
-    - GO15VENDOREXPERIMENT=1 go test
+    - go test ./...
