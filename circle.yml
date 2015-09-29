@@ -26,4 +26,5 @@ test:
     - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $HOME/go/src/github.com/shinofara/
     - ls -la
     - echo $GO15VENDOREXPERIMENT
+    - ls -la vendor/github.com/zenazn/goji
     - go test
