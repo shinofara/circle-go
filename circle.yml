@@ -1,6 +1,7 @@
 machine:
   environment:
     GOROOT_BOOTSTRAP: /usr/local/go
+    GO15VENDOREXPERIMENT: 1
 
   post:
     - mkdir -p ~/.go_workspace/src
@@ -17,5 +18,9 @@ machine:
         pwd: $HOME/go/pkg
   
 dependencies:
-  pre:
+  override:
     - go version
+
+test:
+  override:
+    - go test $(go list ./...|grep -v vendor)
