@@ -25,4 +25,5 @@ test:
     - mkdir -p $HOME/go/src/github.com/shinofara
     - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $HOME/go/src/github.com/shinofara/
     - pwd
+    - ls -la $HOME/$CIRCLE_PROJECT_REPONAME
     - GO15VENDOREXPERIMENT=1 go test
