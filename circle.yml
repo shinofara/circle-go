@@ -1,7 +1,8 @@
 machine:
   environment:
-    GOROOT_BOOTSTRAP: /usr/local/go
     GO15VENDOREXPERIMENT: 1
+    PATH: /home/ubuntu/go/bin:~/bin:$PATH
+    GOROOT: /home/ubuntu/go
 
   post:
     - mkdir -p ~/.go_workspace/src
