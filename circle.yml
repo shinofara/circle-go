@@ -27,4 +27,4 @@ test:
     - ls -la
     - echo $GO15VENDOREXPERIMENT
     - ls -la vendor/github.com/zenazn/goji
-    - go test
+    - GO15VENDOREXPERIMENT=1 go test
