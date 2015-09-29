@@ -25,4 +25,4 @@ test:
     - mkdir -p /home/ubuntu/.go_workspace/src/github.com/shinofara
     - cp -r $HOME/$CIRCLE_PROJECT_REPONAME /home/ubuntu/.go_workspace/src/github.com/shinofara/
     - go version
-    - go test
+    - GO15VENDOREXPERIMENT=1 go test
