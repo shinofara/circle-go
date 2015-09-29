@@ -13,4 +13,4 @@ dependencies:
 test:
   override:
     - go version
-    - go test ./...
+    - go test $(go list ./...|grep -v vendor)
