@@ -23,4 +23,6 @@ dependencies:
 
 test:
   override:
+    - mkdir -p $HOME/go/src/github.com/shinofara
+    - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $HOME/go/src/github.com/shinofara/
     - go test $(go list ./...|grep -v vendor)
