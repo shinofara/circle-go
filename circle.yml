@@ -15,7 +15,7 @@ machine:
         pwd: $HOME/go/bin
     - cp -R * ~/.go_workspace/pkg:
         pwd: $HOME/go/pkg
-  
+
 dependencies:
   override:
     - go version
@@ -24,7 +24,5 @@ test:
   override:
     - mkdir -p $HOME/go/src/github.com/shinofara
     - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $HOME/go/src/github.com/shinofara/
-    - ls -la
-    - echo $GO15VENDOREXPERIMENT
-    - ls -la vendor/github.com/zenazn/goji
+    - pwd
     - GO15VENDOREXPERIMENT=1 go test
