@@ -14,4 +14,6 @@ dependencies:
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/golang
-    - {go test -v $(go list ./...|grep -v vendor); status=$?;} | go-junit-report > $CIRCLE_TEST_REPORTS/golang/junit.xml
+    - |
+      { go test -v $(go list ./...|grep -v vendor); echo $? > /tmp/status;} | go-junit-report > $CIRCLE_TEST_REPORTS/golang/junit.xml;
+      exit `cat /tmp/status`;
