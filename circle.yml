@@ -9,8 +9,11 @@ dependencies:
     - "/home/ubuntu/go"
   pre:
     - if [[ ! -e /home/ubuntu/go/bin/go ]]; then cd /home/ubuntu; curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | tar -xz; fi
+    - go get -u github.com/jstemmer/go-junit-report
 
 test:
   override:
-    - go version
-    - go test $(go list ./...|grep -v vendor)
+    - mkdir -p $CIRCLE_TEST_REPORTS/golang
+    - |
+      { go test -v $(go list ./...|grep -v vendor); echo $? > /tmp/status;} | go-junit-report > $CIRCLE_TEST_REPORTS/golang/junit.xml;
+      exit `cat /tmp/status`;
