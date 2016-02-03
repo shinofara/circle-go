@@ -5,7 +5,7 @@ import (
 )
 
 func TestSample(t *testing.T) {
-	if false {
+	if true {
 		t.Error("sample test error")
 	}
 }
