@@ -6,10 +6,21 @@ machine:
 
 dependencies:
   cache_directories:
-    - "/home/ubuntu/go"
+    - "/home/ubuntu/.go"
   pre:
-    - if [[ ! -e /home/ubuntu/go/bin/go ]]; then cd /home/ubuntu; curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | tar -xz; fi
-    - go get -u github.com/jstemmer/go-junit-report
+    - case $CIRCLE_NODE_INDEX in 0) export GOVERSION=1.5.1 ;; 1) export GOVERSION=1.6.1 ;; esac
+    - >
+      if [[ ! -e /home/ubuntu/go/bin/go ]]; then
+        cd /home/ubuntu; curl https://storage.googleapis.com/golang/go$GOVERSION.linux-amd64.tar.gz | tar -xz;
+        go get -u github.com/jstemmer/go-junit-report;
+        mkdir -p ~/.go;
+        cp -rp ~/go ~/.go/$GOVERSION;
+      else
+        cp -rp ~/.go/$GOVERSION ~/go;
+      fi
+    - go version
+
+
 
 test:
   override:
