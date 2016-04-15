@@ -9,7 +9,7 @@ dependencies:
     - "/home/ubuntu/.go"
   pre:
     - >
-      case $CIRCLE_NODE_INDEX in 0) export GOVERSION=1.5.1 ;; 1) export GOVERSION=1.6.1 ;; esac
+      case $CIRCLE_NODE_INDEX in 0) export GOVERSION=1.5.1 ;; 1) export GOVERSION=1.6.1 ;; esac;
       cd /home/ubuntu;
       if [[ ! -e /home/ubuntu/.go/$GOERSION/bin/go ]]; then
         curl https://storage.googleapis.com/golang/go$GOVERSION.linux-amd64.tar.gz | tar -xz;
